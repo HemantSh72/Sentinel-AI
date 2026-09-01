@@ -4,6 +4,8 @@
 
 > Built at **Chitkara University** — A production-grade demonstration of how multi-model verification pipelines can reduce AI hallucination rates from **35% to under 10%** in high-stakes environments like healthcare and law.
 
+**[Live Demo ↗](https://sentinel-ai-lake.vercel.app/)** · **[Source Code](https://github.com/HemantSh72/Sentinel-AI)**
+
 ---
 
 ## 📌 Problem Statement
@@ -84,54 +86,47 @@ In domains like **medical diagnosis** and **legal research**, a single hallucina
 
 ```
 sentinel-ai/
-├── README.md                          ◀─ You are here
-│
+├── README.md
 ├── frontend/                          ◀─ React + Vite
-│   ├── DOCUMENTATION.md               ◀─ Frontend docs
+│   ├── DOCUMENTATION.md
 │   ├── package.json
 │   ├── vite.config.js
 │   ├── index.html
 │   └── src/
-│       ├── main.jsx                   # Entry point
-│       ├── App.jsx                    # App shell, routing, theme
-│       ├── App.css                    # App-specific styles
-│       ├── index.css                  # Global design system (678 lines)
+│       ├── main.jsx
+│       ├── App.jsx
+│       ├── App.css
+│       ├── index.css
 │       └── components/
-│           ├── ChatInterface.jsx      # Chat UI + SSE streaming
-│           ├── LandingPage.jsx        # Hero + stats + architecture
-│           └── SourceBadge.jsx        # Source citation badge
+│           ├── ChatInterface.jsx
+│           ├── LandingPage.jsx
+│           └── SourceBadge.jsx
 │
 ├── backend/                           ◀─ Node.js + Express
-│   ├── DOCUMENTATION.md               ◀─ Backend docs
-│   ├── README.md                      ◀─ Quick start
+│   ├── DOCUMENTATION.md
+│   ├── README.md
 │   ├── package.json
-│   ├── server.js                      # HTTP listener + shutdown
-│   ├── app.js                         # Express assembly
-│   ├── .env                           # Secrets (gitignored)
-│   ├── .env.example                   # Template
-│   │
-│   ├── config/
-│   │   └── config.js                  # Central env config
-│   ├── routes/
-│   │   └── queryRoutes.js             # API route definitions
-│   ├── controllers/
-│   │   └── queryController.js         # Request handlers + SSE
+│   ├── server.js
+│   ├── app.js
+│   ├── .env.example
+│   ├── config/config.js
+│   ├── routes/queryRoutes.js
+│   ├── controllers/queryController.js
 │   ├── services/
-│   │   ├── ragPipelineService.js      # Pipeline orchestrator
-│   │   └── vectorDbService.js         # Pinecone + mock DB
+│   │   ├── ragPipelineService.js
+│   │   └── vectorDbService.js
 │   ├── agents/
-│   │   ├── filterAgent.js             # Tier 1 — Llama 3.3 70B
-│   │   ├── generatorAgent.js          # Tier 2 — Claude 3 Haiku
-│   │   └── evaluatorAgent.js          # Tier 3 — Gemini 2.0 Flash
+│   │   ├── filterAgent.js
+│   │   ├── generatorAgent.js
+│   │   └── evaluatorAgent.js
 │   ├── middleware/
-│   │   ├── errorHandler.js            # Global error handler
-│   │   └── rateLimiter.js             # Per-IP rate limiting
+│   │   ├── errorHandler.js
+│   │   └── rateLimiter.js
 │   ├── utils/
-│   │   ├── llmClient.js               # OpenRouter API wrapper
-│   │   ├── logger.js                  # Winston logger
-│   │   └── AppError.js                # Custom error class
-│   └── tests/
-│       └── test-pipeline.js           # Integration tests
+│   │   ├── llmClient.js
+│   │   ├── logger.js
+│   │   └── AppError.js
+│   └── tests/test-pipeline.js
 ```
 
 ---
@@ -147,11 +142,8 @@ sentinel-ai/
 ### 1. Clone & Install
 
 ```bash
-# Install frontend
 cd frontend
 npm install
-
-# Install backend
 cd ../backend
 npm install
 ```
@@ -167,11 +159,10 @@ cp .env.example .env
 ### 3. Run Both Servers
 
 ```bash
-# Terminal 1 — Backend (port 5000)
 cd backend
 npm run dev
 
-# Terminal 2 — Frontend (port 5173)
+# Terminal 2
 cd frontend
 npm run dev
 ```
@@ -191,7 +182,7 @@ Navigate to **http://localhost:5173** → Click "Go to Sentinel" → Ask a quest
 | `OPENAI_API_KEY` | Optional | For embeddings (mock if empty) |
 | `FRONTEND_URL` | No | CORS origin (default: `http://localhost:5173`) |
 
-> **Tip**: Without Pinecone/OpenAI keys, the system uses a built-in knowledge base of 15 documents covering medicine, tech, AI, cloud, and more. Perfect for demos.
+> Without Pinecone/OpenAI keys, the system uses a built-in knowledge base of 15 documents covering medicine, tech, AI, cloud, and more.
 
 ---
 
@@ -204,16 +195,7 @@ Returns server status.
 Standard JSON query.
 
 ```json
-// Request
 { "userQuery": "What is Docker?" }
-
-// Response
-{
-  "answer": "Docker is an open-source containerization platform...",
-  "confidenceScore": 8,
-  "sources": [{ "id": "mock-003", "title": "Docker: Containerization Platform Overview" }],
-  "status": "success"
-}
 ```
 
 ### `POST /api/v1/query/stream`
@@ -225,7 +207,7 @@ Real-time SSE streaming with step-by-step pipeline progress.
 
 ```bash
 cd backend
-npm test    # Runs mock pipeline — no API keys needed
+npm test
 ```
 
 ---
