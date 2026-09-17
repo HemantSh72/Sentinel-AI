@@ -21,13 +21,14 @@ const { PORT, NODE_ENV } = require('./config/config');
 })();
 
 // ── Start HTTP Server ─────────────────────────────────────────────────────────
-const server = app.listen(PORT, () => {
+// Render and other cloud hosts need the server exposed on all interfaces.
+const server = app.listen(PORT, '0.0.0.0', () => {
   logger.info('─'.repeat(55));
   logger.info(`  🛡️  Sentinel.AI Backend`);
-  logger.info(`  ✅  Server        : http://localhost:${PORT}`);
-  logger.info(`  📡  Query API     : POST http://localhost:${PORT}/api/v1/query`);
-  logger.info(`  📺  SSE Stream    : POST http://localhost:${PORT}/api/v1/query/stream`);
-  logger.info(`  💓  Health check  : GET  http://localhost:${PORT}/api/v1/health`);
+  logger.info(`  ✅  Server        : http://0.0.0.0:${PORT}`);
+  logger.info(`  📡  Query API     : POST http://0.0.0.0:${PORT}/api/v1/query`);
+  logger.info(`  📺  SSE Stream    : POST http://0.0.0.0:${PORT}/api/v1/query/stream`);
+  logger.info(`  💓  Health check  : GET  http://0.0.0.0:${PORT}/api/v1/health`);
   logger.info('─'.repeat(55));
 });
 
