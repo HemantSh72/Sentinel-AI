@@ -134,9 +134,14 @@ const ChatInterface = () => {
 
       setMessages((prev) => [...prev, botMessage]);
     } catch (error) {
+      const detail = error?.message || 'Unknown network error';
       setMessages((prev) => [
         ...prev,
-        { role: 'bot', content: 'Connection error. Is the backend running on port 5000?', status: 'error' },
+        {
+          role: 'bot',
+          content: `Backend request failed: ${detail}. API endpoint: ${API_BASE}`,
+          status: 'error',
+        },
       ]);
     } finally {
       setIsLoading(false);
