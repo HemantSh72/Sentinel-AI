@@ -19,7 +19,7 @@ module.exports = {
 
   // ── Agent Models ─────────────────────────────────────────
   FILTER_AGENT_MODEL:    process.env.FILTER_AGENT_MODEL    || 'meta-llama/llama-3.3-70b-instruct',
-  GENERATOR_AGENT_MODEL: process.env.GENERATOR_AGENT_MODEL || 'anthropic/claude-3-haiku',
+  // Claude 3 Haiku was deprecated by OpenRouter on 2026-09-10.\n  // Remap stale Render environment values so production does not keep calling a retired model.\n  GENERATOR_AGENT_MODEL: (process.env.GENERATOR_AGENT_MODEL === 'anthropic/claude-3-haiku'\n    ? 'anthropic/claude-haiku-4.5'\n    : (process.env.GENERATOR_AGENT_MODEL || 'anthropic/claude-haiku-4.5')),
   EVALUATOR_AGENT_MODEL: process.env.EVALUATOR_AGENT_MODEL || 'google/gemini-2.0-flash-001',
 
   // ── Pinecone Vector DB ───────────────────────────────────
