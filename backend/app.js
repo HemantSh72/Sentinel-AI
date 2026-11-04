@@ -12,7 +12,11 @@ const rateLimiter                = require('./middleware/rateLimiter');
 const errorHandler               = require('./middleware/errorHandler');
 const logger                     = require('./utils/logger');
 
-const app = express();\n\n// Render runs Express behind a reverse proxy and supplies X-Forwarded-For.\n// Trust the single platform proxy so express-rate-limit can identify client IPs.\napp.set('trust proxy', 1);
+const app = express();
+
+// Render runs Express behind a reverse proxy and supplies X-Forwarded-For.
+// Trust the single platform proxy so express-rate-limit can identify client IPs.
+app.set('trust proxy', 1);
 
 // ── Security Headers ────────────────────────────────────────────────────────
 app.use(helmet());
